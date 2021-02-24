@@ -1,0 +1,19 @@
+{
+  "name": "copper-components",
+  "version": "1.0.5",
+  "description": "AmplifyJS component wrapper by thirteendelta.com.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0x13d-git/copper-components.git"
+  },
+  "author": "Ari Ugwu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/0x13d-git/copper-components/issues"
+  },
+  "homepage": "https://github.com/0x13d-git/copper-components#readme"
+}
