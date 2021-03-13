@@ -1,0 +1,123 @@
+
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Ari Ugwu">
+    <meta name="generator" content="copper-lob">
+
+    <!-- Polyfills -->
+    <script src="https://unpkg.com/@webcomponents/webcomponentsjs@next/webcomponents-loader.js"></script>
+
+    <!-- Resets and Browser Tweaks -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet" />
+
+    <!-- Material Styles -->
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet" />
+
+
+    <!-- BEGIN: cc init -->
+    <script>
+      // Required for AWS Amplify to populate inline like this. May not be requred when pulling in via script tag.
+      var exports = {}
+    </script>
+    <script type="module">
+      // AWS Amplify 
+      //@ SEE: https://www.reddit.com/r/aws/comments/d71c5w/aws_amplify_for_vanilla_javascript_urgent/f0x9x3o?utm_source=share&utm_medium=web2x&context=3
+      //  - exports object is created before brining in the aws-amplify source so it has something to populate.
+      //  - ref: https://docs.amplify.aws/lib/datastore/getting-started/q/platform/js
+      import "https://unpkg.com/aws-amplify@1.1.40/dist/aws-amplify.min.js"
+
+      // PWA Helpers
+      import { connect, lazyReducerEnhancer, installRouter, updateMetadata } from 'https://unpkg.com/pwa-helpers@0.9.1/pwa-helpers.js'
+
+      // xState
+      // @see: https://xstate.js.org/docs/guides/context.html#initial-context
+      import { Machine, assign } from 'https://unpkg.com/xstate@4.16.2/dist/xstate.web.js'
+
+      class cc {
+          constructor(params) {
+              this.logger = params.logger
+              this.settings = params.settings
+              this.amplify = params.amplify
+              this.pwa = params.pwa
+              this.moment = params.moment
+              this.lodash = params.lodash
+              this.sass = params.sass
+              this.xstate = params.xstate
+          }
+
+          /* Quality of Life Helper(s) */
+          getUser() {}
+      }
+      
+      const params = {
+        logger: logdown('cc'),
+        amplify: exports['aws-amplify'],
+        settings: null,
+        pwa: {
+          connect: connect,
+          lazyReducerEnhancer: lazyReducerEnhancer,
+          installRouter: installRouter,
+          updateMetadata: updateMetadata
+        },
+        moment: moment,
+        lodash: _,
+        sass: Sass,
+        xstate: {
+          Machine: Machine,
+          assign: assign
+        }
+      }
+
+      const _cc = new cc(params);
+
+      // console.log(awsAmplify)
+      _cc.amplify.API.configure({
+            "aws_project_region": "us-east-1",
+            "aws_cognito_identity_pool_id": "us-east-1:ec3d9d91-2de7-486a-8229-ffab1ceb29db",
+            "aws_cognito_region": "us-east-1",
+            "aws_user_pools_id": "us-east-1_BazSLcJ9F",
+            "aws_user_pools_web_client_id": "6a5knots08ne62gbgprhgp0ug0",
+            "oauth": {},
+            API: {
+                endpoints: [
+                    {
+                        name: "MyAPIGatewayAPI",
+                        endpoint: "https://utj5x5mki5.execute-api.us-east-1.amazonaws.com/dev"
+                    }
+                ]
+            }
+        });
+
+        _cc.logger.state.isEnabled = true
+
+        /* HUB: PubSub Example */
+
+        _cc.amplify.Hub.listen('foo', (data) => {          
+            console.log(data);
+        })
+
+
+
+
+    </script>
+    <!-- END: cc init -->
+
+    <!-- Begin: Copper::Slug -->
+    <script type="module">
+
+
+
+
+    </script>
+    <!-- END: Copper::Slug -->
+
+  </head>
+  <body class="mdc-typography">
+      <copper-slug></copper-slug>
+  </body> 
+</body>
+</html>

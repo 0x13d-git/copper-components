@@ -1,10 +1,12 @@
 {
   "name": "copper-components",
-  "version": "1.0.5",
+  "version": "0.0.1",
   "description": "AmplifyJS component wrapper by thirteendelta.com.",
-  "main": "dist/index.js",
+  "main": "cc.js",
+  "type": "module",
   "scripts": {
-    "test": "exit 0"
+    "start": "snowpack dev",
+    "build": "snowpack build --polyfill-node"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,18 @@
   "bugs": {
     "url": "https://github.com/0x13d-git/copper-components/issues"
   },
-  "homepage": "https://github.com/0x13d-git/copper-components#readme"
+  "homepage": "https://github.com/0x13d-git/copper-components#readme",
+  "dependencies": {
+    "aws-amplify": "^3.3.23",
+    "lodash": "^4.17.21",
+    "logdown": "^3.3.1",
+    "moment": "^2.29.1",
+    "pwa-helpers": "^0.9.1",
+    "redux": "^4.0.5",
+    "sass": "^1.32.8",
+    "xstate": "^4.16.2"
+  },
+  "devDependencies": {
+    "snowpack": "^3.0.13"
+  }
 }
