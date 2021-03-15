@@ -13,10 +13,11 @@ store.addReducers({
 export class CopperSlug extends connect(store)(LitElement) {
     @property() message = 'Send: SLUG';
     @property() count = 0;
+
     static get styles() {
       return css`
         .fav-button {
-            border: 2px solid #DEDEDE;
+            border: 2px solid blue;
         }
       `;
     }
@@ -36,13 +37,20 @@ export class CopperSlug extends connect(store)(LitElement) {
             <button class="fav-button" @click="${() => store.dispatch({ type: 'INCREMENT' })}">
                 Click to increase count: ${this.count}
             </button>
+
+            <hr />
+            <button class="fav-button" @click="${() => {store.dispatch({ type: 'FOO' })}}">
+                Call 'FOO' from the app actions.
+            </button>
             </div>
+            <hr />
+            <p>We get the full state so we can show things like the 'name' property from another slice. In this case the app slice.: <strong>${store.getState().app.name}</strong></p>
+            <small>Might we worth making this a helper in the utils that will do a safe get for a property, log if it can't be found, and return a -1.</small>
         </div>`
     }
 
     stateChanged(state) {
         this.count = state.slice.count
-        _cc.logger.info('Copper-Slug Log: Example of listening to state changes via redux.')
-        console.log(state)
+        _cc.logger.info('Copper-Slug Log: Example of listening to state changes via redux.', state)
     }
 }

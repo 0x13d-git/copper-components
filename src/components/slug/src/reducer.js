@@ -35,20 +35,18 @@ export function slice(state, action) {
       // Log messages will be written to the window's console.
       _cc.logger.info('/* Copper Slug: Logging Smoke Tests */')
       
-      _cc.logger.info('* Amplify object keys')
-      _cc.logger.log(Object.keys(_cc.amplify))
+      _cc.logger.info('* Amplify object keys', Object.keys(_cc.amplify))
       
       _cc.logger.info('* Change the primary theme color')
       document.querySelector('body').style.setProperty('--mdc-theme-primary', '#1d2d36')
 
-      _cc.logger.info('* Grab API Data')
       _cc.amplify.API.get("MyAPIGatewayAPI", "", {})
         .then(response => {
-            _cc.logger.info(JSON.stringify(response));
+            _cc.logger.info('**Grab API Data**', JSON.stringify(response));
 
         })
         .catch(error => {
-            console.log(error);
+            _cc.logger.error(error);
         });
       
       _cc.logger.log('/* BEGIN example log statements */')

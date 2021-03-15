@@ -7,16 +7,13 @@ function app(state, action) {
   if (typeof state === 'undefined') {
     return {
       name: 'Default App Name',
-      cc: _cc
     }
   }
 
   switch (action.type) {
-    case 'FOO':
-      console.log(cc.logger)      	
+    case 'FOO': 	
       // Log messages will be written to the window's console.
-      this.cc.logger.info('/* App Action Reducer: FOO Call */')
-      
+      _cc.logger.info('/* App Action Reducer: FOO Call */')
       return state
     default:
       return state
