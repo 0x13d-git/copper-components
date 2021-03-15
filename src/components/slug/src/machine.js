@@ -1,9 +1,9 @@
-import {cc} from '../../store/app'
+import { createMachine, assign } from 'xstate';
 
 /* xState Machine for slug */
 
 // Action to increment the context amount
-const addWater = cc.xstate.assign({
+const addWater = assign({
     amount: (context, event) => context.amount + 1
 });
 
@@ -12,7 +12,7 @@ function glassIsFull(context, event) {
     return context.amount >= 10;
 }
 
-const machine = cc.xstate.Machine(
+export const machine = createMachine(
 {
     id: 'glass',
     // the initial context (extended state) of the statechart
@@ -50,5 +50,3 @@ const machine = cc.xstate.Machine(
     guards: { glassIsFull }
 }
 );
-
-export default machine

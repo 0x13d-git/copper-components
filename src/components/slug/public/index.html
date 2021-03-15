@@ -1,15 +1,12 @@
-
-<!doctype html>
-<html lang="en" class="h-100">
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Ari Ugwu">
-    <meta name="generator" content="copper-lob">
-
-    <!-- Polyfills -->
-    <script src="https://unpkg.com/@webcomponents/webcomponentsjs@next/webcomponents-loader.js"></script>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Web site created using create-snowpack-app" />
+    <link rel="stylesheet" type="text/css" href="/index.css" />
+    <title>Snowpack App</title>
 
     <!-- Resets and Browser Tweaks -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet" />
@@ -17,6 +14,12 @@
     <!-- Material Styles -->
     <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet" />
 
+    <!-- Material Icons fonts. -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons&display=block" rel="stylesheet" />
+
+    <!-- Logging: Logdown  -->
+    <script type="text/javascript" src="https://unpkg.com/logdown@3.3.1/dist/logdown.min.js"></script>
 
     <!-- BEGIN: cc init -->
     <script>
@@ -30,9 +33,6 @@
       //  - ref: https://docs.amplify.aws/lib/datastore/getting-started/q/platform/js
       import "https://unpkg.com/aws-amplify@1.1.40/dist/aws-amplify.min.js"
 
-      // PWA Helpers
-      import { connect, lazyReducerEnhancer, installRouter, updateMetadata } from 'https://unpkg.com/pwa-helpers@0.9.1/pwa-helpers.js'
-
       // xState
       // @see: https://xstate.js.org/docs/guides/context.html#initial-context
       import { Machine, assign } from 'https://unpkg.com/xstate@4.16.2/dist/xstate.web.js'
@@ -42,11 +42,6 @@
               this.logger = params.logger
               this.settings = params.settings
               this.amplify = params.amplify
-              this.pwa = params.pwa
-              this.moment = params.moment
-              this.lodash = params.lodash
-              this.sass = params.sass
-              this.xstate = params.xstate
           }
 
           /* Quality of Life Helper(s) */
@@ -56,20 +51,7 @@
       const params = {
         logger: logdown('cc'),
         amplify: exports['aws-amplify'],
-        settings: null,
-        pwa: {
-          connect: connect,
-          lazyReducerEnhancer: lazyReducerEnhancer,
-          installRouter: installRouter,
-          updateMetadata: updateMetadata
-        },
-        moment: moment,
-        lodash: _,
-        sass: Sass,
-        xstate: {
-          Machine: Machine,
-          assign: assign
-        }
+        settings: null
       }
 
       const _cc = new cc(params);
@@ -96,28 +78,28 @@
 
         /* HUB: PubSub Example */
 
-        _cc.amplify.Hub.listen('foo', (data) => {          
-            console.log(data);
+        _cc.amplify.Hub.listen('foo', (data) => {     
+          _cc.logger.info(`Message on Hub Channel Foo: ${data}`)     
         })
 
-
-
+        window.cc = _cc
 
     </script>
     <!-- END: cc init -->
-
-    <!-- Begin: Copper::Slug -->
-    <script type="module">
-
-
-
-
-    </script>
-    <!-- END: Copper::Slug -->
-
   </head>
   <body class="mdc-typography">
-      <copper-slug></copper-slug>
-  </body> 
-</body>
+    <copper-slug></copper-slug>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script type="module" src="/dist/index.js"></script>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
 </html>
