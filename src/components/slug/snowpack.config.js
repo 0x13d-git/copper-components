@@ -1,7 +1,7 @@
 /** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
   mount: {
-    public: { url: '/', static: true },
+    '../../../public': { url: '/', static: true },
     src: { url: '/dist' }
   },
   plugins: ['@snowpack/plugin-babel', '@snowpack/plugin-dotenv'],
@@ -20,6 +20,6 @@ module.exports = {
     /* ... */
   },
   buildOptions: {
-    /* ... */
+    out: "../../../build" // This is src folder of the nodejs app (in the parent dir)  
   },
 };

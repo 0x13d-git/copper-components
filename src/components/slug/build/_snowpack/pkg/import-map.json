@@ -1,9 +1,0 @@
-{
-  "imports": {
-    "lit-element": "./lit-element.js",
-    "pwa-helpers": "./pwa-helpers.js",
-    "pwa-helpers/lazy-reducer-enhancer.js": "./pwa-helpers/lazy-reducer-enhancer.js",
-    "redux": "./redux.js",
-    "xstate": "./xstate.js"
-  }
-}

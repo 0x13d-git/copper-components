@@ -1,26 +1,7 @@
-# New Project
+# Copper: SLUG
 
-> ✨ Bootstrapped with Create Snowpack App (CSA).
+A smoke test and template for new copper components. Components should be self building and testing with no dependencies other than running in the boilerplate HTML file we have established. That boilerplate is boostrapped to provide a redux store and the _copper core_ context library.
 
-## Available Scripts
+## Architectural Decision Record (ADR):
 
-### npm start
-
-Runs the app in the development mode.
-Open http://localhost:8080 to view it in the browser.
-
-The page will reload if you make edits.
-You will also see any lint errors in the console.
-
-### npm run build
-
-Builds the app for production to the `dist/` folder.
-It correctly bundles the app in production mode and optimizes the build for the best performance.
-
-## Directives
-
-In case you need to add a directive like `classMap` you should add the extension to the import:
-
-```
-import { classMap } from "lit-html/directives/class-map.js";
-```
+The temptation is to move things like `package-json` and `babel.config.json` to a root directory. However there's no guarantee that the component itself will need to conform to a certain implementation. Requiring each component to inherit style or dependencies is making assumptions about unknown requirements. For example a wrapper for the `ag-grid` web compoenent may require adopting many of the `ag-grid` conventions in order to work smoothly. In these scenarios the only requirement is that the wrapper provide enough wiring to allow access to the store/cc implementations and common styling of the component.
