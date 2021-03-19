@@ -18,6 +18,7 @@ export class CopperSlug extends connect(store)(LitElement) {
       return css`
         .fav-button {
             border: 2px solid blue;
+            --mdc-theme-primary: #f44336;
         }
       `;
     }
@@ -37,7 +38,6 @@ export class CopperSlug extends connect(store)(LitElement) {
             <button class="fav-button" @click="${() => store.dispatch({ type: 'INCREMENT' })}">
                 Click to increase count: ${this.count}
             </button>
-
             <hr />
             <button class="fav-button" @click="${() => {store.dispatch({ type: 'FOO' })}}">
                 Call 'FOO' from the app actions.

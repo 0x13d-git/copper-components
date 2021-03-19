@@ -14,7 +14,7 @@ module.exports = {
     // "bundle": true,
   },
   packageOptions: {
-    /* ... */
+    source: "remote"
   },
   devOptions: {
     /* ... */
