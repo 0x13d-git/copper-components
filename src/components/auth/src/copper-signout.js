@@ -37,12 +37,15 @@ export class CopperSignOut extends connect(store)(LitElement) {
 
     stateChanged(state) { 
       //https://docs.amplify.aws/guides/authentication/listening-for-auth-events/q/platform/js                              
-      _cc.amplify.Hub.listen('auth', (data) => {
-        if(data.payload.event == 'signIn') {
-          this.displaySignOut = "block"       
-        } else if(data.payload.event == 'signOut') {
-          this.displaySignOut = "none"
-        }         
+      _cc.amplify.Hub.listen('auth', (data) => {      
+        switch (data.payload.event) {
+          case 'signIn':
+              this.displaySignOut = "block"       
+              break;
+          default:
+            this.displaySignOut = "none"
+              break;           
+        }
       });
     }
 

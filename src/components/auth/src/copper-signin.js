@@ -27,31 +27,39 @@ export class CopperSignIn extends connect(store)(LitElement) {
     render() {
         return html`
         <div style="display:${this.displaySignIn};">
-          <h4>Sign In</h4>
-          Username:
-          <input type="text" id="username">
-          <br>
-          Password:
-          <input type="password" name="pass" id="pwd">
-          <br>
-          <button class="fav-button" @click="${this._signIn}">
-            Sign In
-          </button>
-        </div>     `
+            <h4>Sign In</h4>
+            Username:
+            <input type="text" id="username">
+            <br>
+            Password:
+            <input type="password" name="pass" id="pwd">
+            <br>
+            <button class="fav-button" @click="${this._signIn}">
+              Sign In
+            </button>
+        </div>`
     }
 
     stateChanged(state) {
         //https://docs.amplify.aws/guides/authentication/listening-for-auth-events/q/platform/js
-        _cc.amplify.Hub.listen('auth', (data) => {
-          if(data.payload.event == 'signIn') {                      
-            this.displaySignIn = "none"
-          } else if(data.payload.event == 'signOut') {                              
-            this.displaySignIn = "block"
-          }         
+        _cc.amplify.Hub.listen('auth', (data) => {          
+          switch (data.payload.event) {
+            case 'signOut':
+              this.displaySignIn = "block"
+                break;
+            case 'confirmCode':
+              this.displaySignIn = "block"
+              break;    
+            default:
+              this.displaySignIn = "none"
+                break;            
+          }
+
         });
       }
 
     _signIn(e) {     
+      store.dispatch({  type: 'notAuthd', isAuth: false }) 
       var username = this.shadowRoot.getElementById("username").value
       var pass = this.shadowRoot.getElementById("pwd").value
       _cc.amplify.Auth.signIn(
@@ -63,7 +71,6 @@ export class CopperSignIn extends connect(store)(LitElement) {
       ).catch(error => {        
         _cc.logger.error(error)
         store.dispatch({ type: 'logIn', isAuth: false })          
-      });      
-      store.dispatch({  type: 'notAuthd', isAuth: false })        
+      });                   
     }
 }

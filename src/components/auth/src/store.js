@@ -8,18 +8,8 @@ function app(state, action) {
     return {
       name: 'Default App Name',
     }
-  }
-
-  switch (action.type) {
-    case 'LOGGING_IN':  
-      console.log("store listening login")      
-      return state
-    case 'LOGGING_OUT':          
-      console.log("store listening log out")
-      return state
-    default:
-      return state  
-  }
+  }  
+  return state;
 }
 
 

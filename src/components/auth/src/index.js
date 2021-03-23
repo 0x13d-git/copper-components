@@ -1,5 +1,7 @@
 import './copper-signin';
 import './copper-signout';
+import './copper-signup';
+import './copper-confirm';
 import '@material/mwc-ripple';
 import '@material/mwc-top-app-bar';
 
