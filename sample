@@ -1,10 +1,9 @@
-- name : common-alb
+- name: common-alb
   gear: autocruise-express-alb:<4.0.0
-  inputs: &common_alb_config
-
+  inputs: null
 - name: dev-east
-  # Node.js gives OS info about the node (Host)
-  nodeinfo: &function
+  nodeinfo:
+    &a1
     image: functions/nodeinfo:latest
     labels:
       function: "true"
@@ -13,25 +12,23 @@
     networks:
       - functions
     environment:
-      no_proxy: "gateway"
+      no_proxy: gateway
       https_proxy: $https_proxy
-      temperature: hot
+      temperature: cold
     deploy:
       placement:
         constraints:
-          - 'node.platform.os == linux'
-  # Uses `cat` to echo back response, fastest function to execute.
+          - node.platform.os == linux
   echoit:
-    <<: *function
+    <<: *a1
     image: functions/alpine:health
     environment:
-      fprocess: "cat"
-      no_proxy: "gateway"
-      https_proxy: $https_proxy  
-
+      fprocess: cat
+      no_proxy: gateway
+      https_proxy: $https_proxy
 - name: prod-east
-  # Node.js gives OS info about the node (Host)
-  nodeinfo: &function
+  nodeinfo:
+    &a2
     image: functions/nodeinfo:latest
     labels:
       function: "true"
@@ -40,18 +37,17 @@
     networks:
       - functions
     environment:
-      no_proxy: "gateway"
+      no_proxy: gateway
       https_proxy: $https_proxy
       temperature: hot
     deploy:
       placement:
         constraints:
-          - 'node.platform.os == linux'
-  # Uses `cat` to echo back response, fastest function to execute.
+          - node.platform.os == linux
   echoit:
-    <<: *function
+    <<: *a2
     image: functions/alpine:health
     environment:
-      fprocess: "cat"
-      no_proxy: "gateway"
-      https_proxy: $https_proxy  
+      fprocess: cat
+      no_proxy: gateway
+      https_proxy: $https_proxy
