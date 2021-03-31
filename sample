@@ -15,6 +15,7 @@
     environment:
       no_proxy: "gateway"
       https_proxy: $https_proxy
+      temperature: hot
     deploy:
       placement:
         constraints:
@@ -41,6 +42,7 @@
     environment:
       no_proxy: "gateway"
       https_proxy: $https_proxy
+      temperature: hot
     deploy:
       placement:
         constraints:
