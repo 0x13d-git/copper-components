@@ -28,8 +28,17 @@ To create an optimised version of the app:
 npm run build
 ```
 
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
+Install http-server to get a bare-bone deployment with http-server
 
+```bash
+npm install http-server
+```
+
+then run the app
+
+```bash
+http-server -p 8080 -c-1
+```
 
 # svelte app
 
