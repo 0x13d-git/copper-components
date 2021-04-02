@@ -54,7 +54,7 @@ If you're building a single-page app (SPA) with multiple routes, sirv needs to b
 "start": "sirv public --single"
 ```
 
-#### IGNORE BELOW FOR NOW ####
+# IGNORE BELOW FOR NOW #
 
 Have not tried vercel but looks cool
 
