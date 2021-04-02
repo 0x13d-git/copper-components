@@ -1,5 +1,5 @@
 import { createStore, compose, combineReducers } from 'redux'
-import { lazyReducerEnhancer } from 'pwa-helpers/lazy-reducer-enhancer.js';
+import { lazyReducerEnhancer } from 'pwa-helpers/lazy-reducer-enhancer';
 
 const _cc = window.cc
 

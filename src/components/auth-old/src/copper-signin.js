@@ -28,10 +28,10 @@ export class CopperSignIn extends connect(store)(LitElement) {
         return html`
         <div style="display:${this.displaySignIn};">
             <h4>Sign In</h4>
-            Username:
+            Username<BR/>
             <input type="text" id="username">
             <br>
-            Password:
+            Password<BR/>
             <input type="password" name="pass" id="pwd">
             <br>
             <button class="fav-button" @click="${this._signIn}">
@@ -48,6 +48,9 @@ export class CopperSignIn extends connect(store)(LitElement) {
               this.displaySignIn = "block"
                 break;
             case 'confirmCode':
+              this.displaySignIn = "block"
+              break;    
+            case 'forgotPasswordSubmit':              
               this.displaySignIn = "block"
               break;    
             default:
