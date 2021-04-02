@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width,initial-scale=1'>
+
+	<title>Svelte app</title>
+
+	<link rel='icon' type='image/png' href='/favicon.png'>
+	<link rel='stylesheet' href='global.css'>	
+
+	<!-- Material Web Components-->
+	<script type="module" src="https://unpkg.com/@material/mwc-drawer?module"></script>
+
+	<!-- Logging: Logdown  -->
+	<script type="text/javascript" src="https://unpkg.com/logdown@3.3.1/dist/logdown.min.js"></script>
+
+	<!-- BEGIN: cc init -->
+	<script>
+		// Required for AWS Amplify to populate inline like this. May not be requred when pulling in via script tag.
+		var exports = {}
+	</script>
+	<script type="module">
+		// AWS Amplify 
+		//@ SEE: https://www.reddit.com/r/aws/comments/d71c5w/aws_amplify_for_vanilla_javascript_urgent/f0x9x3o?utm_source=share&utm_medium=web2x&context=3
+		//  - exports object is created before brining in the aws-amplify source so it has something to populate.
+		//  - ref: https://docs.amplify.aws/lib/datastore/getting-started/q/platform/js
+		import "https://unpkg.com/aws-amplify@1.1.40/dist/aws-amplify.min.js"
+
+		// xState
+		// @see: https://xstate.js.org/docs/guides/context.html#initial-context
+		import { Machine, assign } from 'https://unpkg.com/xstate@4.16.2/dist/xstate.web.js'
+
+		class cc {
+			constructor(params) {
+				this.logger = params.logger
+				this.settings = params.settings
+				this.amplify = params.amplify
+			}
+
+			/* Quality of Life Helper(s) */
+			getUser() {}
+		}
+		
+	
+		const params = {
+		logger: logdown('cc'),
+		amplify: exports['aws-amplify'],
+		settings: {
+			name: `HTML5<span style="font-style: italic; font-weight: bold; color: #cc4b06;">a</span> Boilerplate`,
+			description: 'The popular HTML% Boilerplate, <span style="font-style: italic; font-weight: bold; color: #cc4b06;>Amplified.</a>',
+			mainNav: [
+			{
+				path: '/',
+				name: 'Home',
+				alt: 'Home',
+				icon: 'home',
+
+			},
+			{
+				path: '/about',
+				name: 'About',
+				alt: 'About',
+				icon: '',
+
+			},
+
+			{
+				path: '/contact',
+				name: 'Contact Us',
+				alt: 'Contact Us',
+				icon: '',
+
+			}
+			],
+			subNav: [],
+			auxNav: [],
+			content: [
+			]
+		}
+		}
+
+		const _cc = new cc(params);      
+		_cc.amplify.Auth.configure({
+		"aws_project_region": "us-east-1",
+		"aws_cognito_identity_pool_id": "us-east-1:ec3d9d91-2de7-486a-8229-ffab1ceb29db",
+		"aws_cognito_region": "us-east-1",
+		"aws_user_pools_id": "us-east-1_BazSLcJ9F",
+		"aws_user_pools_web_client_id": "6a5knots08ne62gbgprhgp0ug0",
+		"oauth": {}
+		});
+
+		_cc.logger.state.isEnabled = true
+
+		window.cc = _cc
+
+	</script>
+
+	<script defer src='copper-components.js'></script>
+
+</head>
+
+<body>	
+	<copper-auth></copper-auth>
+	<copper-bar></copper-bar>
+	<copper-foo></copper-foo>	
+</body>
+</html>

@@ -27,17 +27,21 @@ export class CopperSignUp extends connect(store)(LitElement) {
     render() {
         return html`
         <div style="display:${this.displaySignUp};">
+            <hr />
             <h4>Sign Up</h4>
-            email:
+            Email
+            <BR/>
             <input type="email" name="remail" id="remail">
             <br />
-            username:
+            Username
+            <BR/>
             <input type="text" id="reuser">           
             <br />
-            password:
+            Password
+            <BR/>
             <input type="password" name="repass" id="repass">
             <br />
-            <button id="authSignUp" @click="${this._signUp}">Sign Up</button>
+            <button class="fav-button" id="authSignUp" @click="${this._signUp}">Sign Up</button>
         </div>
         `
     }

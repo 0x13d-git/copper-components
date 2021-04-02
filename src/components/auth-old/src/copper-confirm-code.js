@@ -9,7 +9,7 @@ store.addReducers({
     slice
 })
 
-@customElement('copper-confirm')
+@customElement('copper-confirm-code')
 export class CopperConfirmCode extends connect(store)(LitElement) {
     @property() message = 'Send: Confirmation';
     @property() count = 0;
@@ -28,16 +28,16 @@ export class CopperConfirmCode extends connect(store)(LitElement) {
         return html`
         <div style="display:${this.displayConfirm};">
             <h4>Confirm Sign Up</h4>
-            username:
+            Username:
             <input type="text" id="confirmUser">
             <br />
-            confirmation code:
+            Confirmation code:
             <input type="text" id="confirmCode">
             <br />
-            <button id="confirm" @click="${this._confirmCode}">confirm</button>
+            <button class="fav-button" id="confirm" @click="${this._confirmCode}">confirm</button>
             <br />
             Did not get it? Please type in username first then click button below.
-            <button id="resend" @click="${this._resendCode}">resend confirmation code</button>
+            <button class="fav-button" id="resend" @click="${this._resendCode}">resend confirmation code</button>
         </div>
         `
     }
@@ -45,7 +45,6 @@ export class CopperConfirmCode extends connect(store)(LitElement) {
     stateChanged(state) {
         //https://docs.amplify.aws/guides/authentication/listening-for-auth-events/q/platform/js                              
         _cc.amplify.Hub.listen('auth', (data) => {
-            _cc.logger.info("stateChanged - confirmcode: " + data.payload.event)
             switch (data.payload.event) {
                 case 'signUp':
                     this.displayConfirm = "block"

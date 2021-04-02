@@ -36,6 +36,7 @@ export class CopperSignOut extends connect(store)(LitElement) {
     }
 
     stateChanged(state) { 
+    _cc.logger.info("something happened")
       //https://docs.amplify.aws/guides/authentication/listening-for-auth-events/q/platform/js                              
       _cc.amplify.Hub.listen('auth', (data) => {      
         switch (data.payload.event) {

@@ -108,6 +108,9 @@
       body {
         --mdc-theme-primary: #1d2d36
       }
+      .center {
+        text-align: center;
+      }
     </style>
   </head>
   <body class="mdc-typography --mdc-theme-primary">
@@ -157,14 +160,21 @@
             <mwc-icon-button icon="favorite" slot="actionItems"></mwc-icon-button>
             <mwc-icon-button icon="account_circle" slot="actionItems"></mwc-icon-button>
           </mwc-top-app-bar>
-          <div>
-            <copper-signin></copper-signin>
+          <div class="center">
+            <!-- Show sign in and registrationn by default -->
+            <copper-signin></copper-signin> 
+            <!-- Display a link take user to forget password view.-->
             <br/>
-            <copper-signup></copper-signup>
+            <copper-forget-pass></copper-forget-pass>            
+            <copper-signup></copper-signup> 
+
+            <!-- Confirm registration by typing in username name code  -->
+            <copper-confirm-code></copper-confirm-code> 
+
+            <!-- Only display sign out when signed in -->  
             <copper-signout></copper-signout>
-            <copper-confirm></copper-confirm-code>
-          </div>
-          <hr />
+                      
+          </div>          
         </div>
     </mwc-drawer>
     <noscript>You need to enable JavaScript to run this app.</noscript>
